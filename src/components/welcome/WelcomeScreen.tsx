@@ -21,7 +21,7 @@ export default function WelcomeScreen({ onStart }: WelcomeScreenProps) {
       <div className="text-center max-w-[460px]">
         <div className="text-[52px] mb-3">{"</>"}</div>
         <h1 className="text-[28px] font-extrabold text-vc-text font-sans tracking-tight mb-2">
-          AI Coding Bootcamp
+          Vibey Coder
         </h1>
         <p className="text-sm text-vc-text-dim mb-7 leading-relaxed">
           4 weeks · 30 min/day · Zero to building AI-powered apps

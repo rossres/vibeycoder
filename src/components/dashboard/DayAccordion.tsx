@@ -9,6 +9,7 @@ interface DayAccordionProps {
   day: Day;
   dayIndex: number;
   weekIndex: number;
+  weekTitle: string;
   weekColor: string;
   done: Record<string, true>;
   toggle: (weekIdx: number, dayIdx: number, taskIdx: number) => void;
@@ -17,12 +18,14 @@ interface DayAccordionProps {
   onToggleExpand: () => void;
   expandedTask: number | null;
   onToggleTask: (taskIdx: number) => void;
+  onStuck: (taskIdx: number) => void;
 }
 
 export default function DayAccordion({
   day,
   dayIndex,
   weekIndex,
+  weekTitle,
   weekColor,
   done,
   toggle,
@@ -31,6 +34,7 @@ export default function DayAccordion({
   onToggleExpand,
   expandedTask,
   onToggleTask,
+  onStuck,
 }: DayAccordionProps) {
   const isDone = dayProgress.pct === 100;
 
@@ -92,11 +96,14 @@ export default function DayAccordion({
                   weekIdx={weekIndex}
                   dayIdx={dayIndex}
                   taskIdx={ti}
+                  weekTitle={weekTitle}
+                  dayTitle={day.title}
                   weekColor={weekColor}
                   isDone={!!done[key]}
                   isExpanded={expandedTask === ti}
                   onToggleExpand={() => onToggleTask(ti)}
                   onToggleComplete={() => toggle(weekIndex, dayIndex, ti)}
+                  onStuck={() => onStuck(ti)}
                 />
               );
             })}

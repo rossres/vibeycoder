@@ -3,21 +3,22 @@
 interface HeaderProps {
   name: string;
   totalProgress: { t: number; d: number; pct: number };
+  shippedCount: number;
   onLoginClick?: () => void;
   isAuthenticated?: boolean;
 }
 
-export default function Header({ name, totalProgress, onLoginClick, isAuthenticated }: HeaderProps) {
+export default function Header({ name, totalProgress, shippedCount, onLoginClick, isAuthenticated }: HeaderProps) {
   return (
     <div className="px-5 pt-4 pb-3 border-b border-vc-border">
       <div className="flex justify-between items-center mb-2.5">
         <div>
-          <h1 className="text-lg font-extrabold text-vc-text font-sans m-0">AI Coding Bootcamp</h1>
+          <h1 className="text-lg font-extrabold text-vc-text font-sans m-0">Vibey Coder</h1>
           <p className="text-xs text-vc-text-dim mt-0.5">
             Hey <span className="text-vc-cyan">{name}</span>
           </p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           {!isAuthenticated && onLoginClick && (
             <button
               onClick={onLoginClick}
@@ -26,8 +27,13 @@ export default function Header({ name, totalProgress, onLoginClick, isAuthentica
               Log in
             </button>
           )}
+          {shippedCount > 0 && (
+            <div className="bg-vc-surface rounded-2xl px-3 py-1 text-xs font-semibold text-vc-text">
+              🚀 {shippedCount}
+            </div>
+          )}
           <div className="bg-vc-surface rounded-2xl px-3 py-1 text-xs font-semibold text-vc-text">
-            🔥 {totalProgress.d}/{totalProgress.t}
+            {totalProgress.d}/{totalProgress.t}
           </div>
         </div>
       </div>
