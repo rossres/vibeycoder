@@ -1,26 +1,63 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-vc-bg: #08080d;
+  --color-vc-card: #0f0f18;
+  --color-vc-card-inner: #0a0a12;
+  --color-vc-border: #181828;
+  --color-vc-border-inner: #161622;
+  --color-vc-surface: #151520;
+  --color-vc-surface-alt: #12121a;
+  --color-vc-surface-hover: #1a1a2a;
+  --color-vc-input-border: #252535;
+  --color-vc-progress-track: #1e1e2e;
+  --color-vc-cyan: #00f0ff;
+  --color-vc-purple: #a855f7;
+  --color-vc-orange: #f97316;
+  --color-vc-green: #10b981;
+  --color-vc-gold: #f9a825;
+  --color-vc-text: #ffffff;
+  --color-vc-text-secondary: #dddddd;
+  --color-vc-text-muted: #999999;
+  --color-vc-text-dim: #666666;
+  --color-vc-text-faint: #555555;
+  --color-vc-text-ghost: #444444;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-mono: 'Menlo', 'SF Mono', 'Fira Code', monospace;
+  --font-sans: 'SF Pro Display', 'Inter', 'Segoe UI', system-ui, sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-vc-bg);
+  color: var(--color-vc-text-secondary);
+  font-family: var(--font-mono);
+}
+
+/* Animations */
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #252535;
+  border-radius: 3px;
 }
