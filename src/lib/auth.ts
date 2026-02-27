@@ -5,7 +5,7 @@ import {
   onAuthStateChanged,
   type User,
 } from "firebase/auth";
-import { auth } from "./firebase";
+import { getFirebaseAuth } from "./firebase";
 import { createUserProfile, saveUserProgress } from "./firestore";
 
 export async function signUp(
@@ -14,6 +14,8 @@ export async function signUp(
   name: string,
   existingProgress: Record<string, true>
 ): Promise<User> {
+  const auth = getFirebaseAuth();
+  if (!auth) throw new Error("Firebase not configured");
   const credential = await createUserWithEmailAndPassword(auth, email, password);
   const user = credential.user;
 
@@ -26,14 +28,24 @@ export async function signUp(
 }
 
 export async function signIn(email: string, password: string): Promise<User> {
+  const auth = getFirebaseAuth();
+  if (!auth) throw new Error("Firebase not configured");
   const credential = await signInWithEmailAndPassword(auth, email, password);
   return credential.user;
 }
 
 export async function signOut() {
+  const auth = getFirebaseAuth();
+  if (!auth) return;
   await firebaseSignOut(auth);
 }
 
-export function onAuthChange(callback: (user: User | null) => void) {
+export function onAuthChange(callback: (user: User | null) => void): (() => void) {
+  const auth = getFirebaseAuth();
+  if (!auth) {
+    // Firebase not configured — call back with null immediately and return no-op
+    callback(null);
+    return () => {};
+  }
   return onAuthStateChanged(auth, callback);
 }
