@@ -1,106 +1,156 @@
 import Link from "next/link";
+import Image from "next/image";
 import Footer from "@/components/layout/Footer";
 
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-vc-bg text-vc-text-secondary font-mono flex flex-col">
       <div className="flex-1">
-        {/* Hero */}
-        <div className="px-6 pt-16 pb-12 text-center max-w-2xl mx-auto">
-          <div className="text-6xl mb-4">{"</>"}</div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-vc-text font-sans tracking-tight mb-3 leading-tight">
-            Help Your Teen Learn{" "}
+        {/* ── Nav ── */}
+        <header className="px-6 py-4 flex justify-between items-center max-w-6xl mx-auto w-full md:py-5 md:px-8 animate-fade-in">
+          <Link href="/" className="no-underline">
+            <Image
+              src="/orb.png"
+              alt="vibeycoder"
+              width={48}
+              height={48}
+              className="h-10 w-10 md:h-12 md:w-12"
+              priority
+            />
+          </Link>
+          <Link
+            href="/dashboard"
+            className="btn-glow inline-block px-5 py-2 rounded-lg text-xs font-bold font-sans no-underline text-black md:px-6 md:py-2.5 md:text-sm md:rounded-xl"
+            style={{ background: "linear-gradient(135deg, #a855f7, #00f0ff)" }}
+          >
+            Start Coding
+          </Link>
+        </header>
+
+        {/* ── Hero ── */}
+        <div className="px-6 pt-16 pb-16 text-center max-w-4xl mx-auto md:pt-24 md:pb-24 lg:pt-32 lg:pb-28 relative">
+          {/* Atmospheric glow */}
+          <div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] md:w-[900px] md:h-[500px] pointer-events-none"
+            style={{
+              background: "radial-gradient(ellipse, rgba(0,240,255,0.06) 0%, rgba(168,85,247,0.05) 30%, rgba(249,115,22,0.02) 50%, transparent 70%)",
+              filter: "blur(60px)",
+            }}
+          />
+
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-vc-text font-sans tracking-tight leading-[1.1] mb-6 relative animate-fade-in-d1">
+            Build Real Things.
+            <br />
             <span className="bg-gradient-to-r from-vc-cyan via-vc-purple to-vc-orange bg-clip-text text-transparent">
-              to Code with AI
+              Ship Every Week.
             </span>
           </h1>
-          <p className="text-base text-vc-text-dim mb-8 leading-relaxed max-w-md mx-auto">
-            A 4-week guided bootcamp that takes your teen from zero to building AI-powered apps.
-            30 minutes a day. No experience needed.
+
+          <p className="text-base text-vc-text-muted mb-10 leading-relaxed max-w-lg mx-auto md:text-xl md:max-w-2xl md:mb-12 relative animate-fade-in-d2">
+            A 28-day builder lab where you create real apps with AI coding tools. No boring lectures, just pure creation.
           </p>
-          <Link
-            href="/dashboard"
-            className="inline-block px-8 py-4 rounded-xl text-base font-bold font-sans no-underline text-black transition-transform hover:scale-105"
-            style={{ background: "linear-gradient(135deg, #00f0ff, #a855f7)" }}
-          >
-            Start Free →
-          </Link>
-          <p className="text-xs text-vc-text-ghost mt-4">No credit card required · Progress saves automatically</p>
+
+          <div className="relative animate-fade-in-d3">
+            <Link
+              href="/dashboard"
+              className="btn-glow inline-block px-10 py-4 rounded-xl text-base font-bold font-sans no-underline text-black md:px-12 md:py-5 md:text-lg md:rounded-2xl"
+              style={{ background: "linear-gradient(135deg, #00f0ff, #a855f7)" }}
+            >
+              Start
+            </Link>
+          </div>
         </div>
 
-        {/* Stats */}
-        <div className="flex justify-center gap-12 sm:gap-16 px-6 pb-12">
-          {[
-            ["28", "Days", "Structured daily lessons"],
-            ["30", "Min/Day", "Short, focused sessions"],
-            ["140+", "Tasks", "Hands-on activities"],
-          ].map(([num, label, desc]) => (
-            <div key={label} className="text-center">
-              <div className="text-3xl font-bold text-vc-cyan">{num}</div>
-              <div className="text-[10px] text-vc-text-faint uppercase tracking-widest mt-1">{label}</div>
-              <div className="text-[10px] text-vc-text-ghost mt-1 hidden sm:block">{desc}</div>
-            </div>
-          ))}
-        </div>
-
-        {/* What they'll learn */}
-        <div className="max-w-2xl mx-auto px-6 pb-16">
-          <h2 className="text-xl font-bold text-vc-text font-sans text-center mb-8">
-            The 4-Week Journey
+        {/* ── What this is ── */}
+        <div className="max-w-xl mx-auto px-6 pb-16 md:pb-20 lg:max-w-2xl">
+          <h2 className="text-xl font-bold text-vc-text font-sans text-center mb-5 md:text-2xl lg:text-3xl">
+            This is a builder lab.
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {[
-              { icon: "🧱", title: "Week 1: The Foundation", desc: "Meet AI coding tools, write first HTML/CSS/JavaScript, build a real project", color: "#00f0ff" },
-              { icon: "🚀", title: "Week 2: Level Up", desc: "VS Code, GitHub, APIs, React — the tools and frameworks real developers use", color: "#a855f7" },
-              { icon: "🧠", title: "Week 3: AI Power Mode", desc: "AI APIs, image generation, automation — give apps a brain", color: "#f97316" },
-              { icon: "🏆", title: "Week 4: Build & Ship", desc: "Full-stack projects, deployment, portfolio — launch real apps to the world", color: "#10b981" },
-            ].map((week) => (
-              <div
-                key={week.title}
-                className="bg-vc-card rounded-xl p-5"
-                style={{ borderLeft: `3px solid ${week.color}` }}
-              >
-                <span className="text-2xl">{week.icon}</span>
-                <h3 className="text-sm font-bold text-vc-text font-sans mt-2 mb-1">{week.title}</h3>
-                <p className="text-xs text-vc-text-dim leading-relaxed m-0">{week.desc}</p>
-              </div>
-            ))}
+          <div className="text-sm text-vc-text-dim leading-relaxed text-center space-y-3 md:text-base md:space-y-4">
+            <p>
+              You don&apos;t watch videos.<br />
+              You don&apos;t memorize syntax.<br />
+              You build.
+            </p>
+            <p className="text-vc-text-muted">
+              Vibey Coder guides you step by step while you use AI coding tools to create real apps.
+            </p>
+            <p className="text-vc-text-ghost font-mono text-xs tracking-wide md:text-sm">
+              Prompt. Generate. Inspect. Refine. Ship.
+            </p>
           </div>
         </div>
 
-        {/* For parents section */}
-        <div className="bg-vc-card border-y border-vc-border py-12 px-6">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-xl font-bold text-vc-text font-sans mb-4">Built for Parents & Teens</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-left">
-              {[
-                { icon: "🔒", title: "Safe & Private", desc: "No ads, no tracking. We only store a name, email, and progress data." },
-                { icon: "🧭", title: "Self-Paced", desc: "Your teen works at their own speed. Pick up anytime, from any device." },
-                { icon: "🤖", title: "AI-First", desc: "Learn the way the future works — with AI as a creative coding partner." },
-              ].map((item) => (
-                <div key={item.title} className="text-center sm:text-left">
-                  <div className="text-2xl mb-2">{item.icon}</div>
-                  <h3 className="text-sm font-bold text-vc-text font-sans mb-1">{item.title}</h3>
-                  <p className="text-xs text-vc-text-dim leading-relaxed m-0">{item.desc}</p>
-                </div>
-              ))}
+        {/* ── What you'll do ── */}
+        <div className="max-w-2xl mx-auto px-6 pb-16 md:pb-20 lg:max-w-3xl">
+          <h2 className="text-xl font-bold text-vc-text font-sans text-center mb-6 md:text-2xl md:mb-8 lg:text-3xl">
+            In 28 days, you will:
+          </h2>
+          <ul className="space-y-3 max-w-md mx-auto md:max-w-none md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-4 md:space-y-0">
+            {[
+              "Build and ship 4 real apps",
+              "Learn how websites are structured",
+              "Use AI to write and improve code",
+              "Debug errors without panicking",
+              "Deploy projects publicly",
+            ].map((item) => (
+              <li key={item} className="flex items-center gap-3 text-sm text-vc-text-dim md:text-base">
+                <span
+                  className="w-1 h-1 rounded-full bg-vc-cyan shrink-0 md:w-1.5 md:h-1.5"
+                  style={{ boxShadow: "0 0 6px rgba(0,240,255,0.4)" }}
+                />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* ── How it works ── */}
+        <div className="bg-vc-card/50 border-y border-vc-border py-12 px-6 md:py-16 lg:py-20">
+          <div className="max-w-xl mx-auto text-center md:max-w-2xl">
+            <h2 className="text-xl font-bold text-vc-text font-sans mb-5 md:text-2xl md:mb-6 lg:text-3xl">
+              How it works
+            </h2>
+            <div className="text-sm text-vc-text-dim leading-relaxed space-y-3 md:text-base md:space-y-4">
+              <p>
+                You build outside the lab.<br />
+                The lab tells you what to do.
+              </p>
+              <p>
+                Each mission takes about 30 minutes.<br />
+                You move at your pace.
+              </p>
+              <p className="text-vc-text-ghost font-mono text-xs tracking-wide md:text-sm">
+                No pressure. No streaks. Just progress.
+              </p>
             </div>
           </div>
         </div>
 
-        {/* Final CTA */}
-        <div className="py-16 px-6 text-center">
-          <h2 className="text-2xl font-bold text-vc-text font-sans mb-3">Ready to start?</h2>
-          <p className="text-sm text-vc-text-dim mb-6">
-            Give your teen the most valuable skill of the future.
-          </p>
-          <Link
-            href="/dashboard"
-            className="inline-block px-8 py-4 rounded-xl text-base font-bold font-sans no-underline text-black transition-transform hover:scale-105"
-            style={{ background: "linear-gradient(135deg, #00f0ff, #a855f7)" }}
-          >
-            Start the Bootcamp →
-          </Link>
+        {/* ── Final CTA ── */}
+        <div className="py-16 px-6 text-center md:py-24 lg:py-32 relative">
+          <div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[200px] md:w-[600px] md:h-[300px] pointer-events-none"
+            style={{
+              background: "radial-gradient(ellipse, rgba(168,85,247,0.06) 0%, rgba(0,240,255,0.03) 40%, transparent 70%)",
+              filter: "blur(40px)",
+            }}
+          />
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-vc-text font-sans mb-4 leading-snug relative">
+            Most people use AI.<br />
+            <span className="bg-gradient-to-r from-vc-cyan to-vc-purple bg-clip-text text-transparent">
+              You build with it.
+            </span>
+          </h2>
+          <div className="mt-8 relative">
+            <Link
+              href="/dashboard"
+              className="btn-glow inline-block px-10 py-4 rounded-xl text-base font-bold font-sans no-underline text-black md:px-12 md:py-5 md:text-lg md:rounded-2xl"
+              style={{ background: "linear-gradient(135deg, #00f0ff, #a855f7)" }}
+            >
+              Start
+            </Link>
+          </div>
         </div>
       </div>
 

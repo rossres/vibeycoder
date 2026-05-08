@@ -4,7 +4,7 @@ import { useState } from "react";
 import type { Task } from "@/types/curriculum";
 import CheckIcon from "@/components/ui/CheckIcon";
 import ChevronIcon from "@/components/ui/ChevronIcon";
-import { buildAskClaudePrompt, copyAndOpenClaude, copyToClipboard } from "@/lib/claude";
+import { buildAskClaudePrompt, copyToClipboard } from "@/lib/claude";
 import { track } from "@/lib/analytics";
 
 interface TaskItemProps {
@@ -20,6 +20,7 @@ interface TaskItemProps {
   onToggleExpand: () => void;
   onToggleComplete: () => void;
   onStuck: () => void;
+  onAskClaude: () => void;
 }
 
 export default function TaskItem({
@@ -35,15 +36,13 @@ export default function TaskItem({
   onToggleExpand,
   onToggleComplete,
   onStuck,
+  onAskClaude,
 }: TaskItemProps) {
   const [copied, setCopied] = useState(false);
 
-  const handleAskClaude = async () => {
-    const prompt = buildAskClaudePrompt(weekTitle, dayTitle, task.text, task.how);
+  const handleAskClaude = () => {
     track("ask_claude_clicked", { week: weekIdx + 1, day: dayIdx + 1, task: taskIdx });
-    setCopied(true);
-    await copyAndOpenClaude(prompt);
-    setTimeout(() => setCopied(false), 3000);
+    onAskClaude();
   };
 
   const handleCopyPrompt = async () => {
@@ -61,11 +60,11 @@ export default function TaskItem({
       {/* Task row */}
       <button
         onClick={onToggleExpand}
-        className="w-full flex items-start gap-2.5 px-3 py-2.5 bg-transparent border-none cursor-pointer text-vc-text-secondary font-mono text-left"
+        className="w-full flex items-start gap-2.5 px-3 py-2.5 bg-transparent border-none cursor-pointer text-vc-text-secondary font-mono text-left md:px-4 md:py-3"
       >
         <div
           onClick={(e) => { e.stopPropagation(); onToggleComplete(); }}
-          className="w-[18px] h-[18px] rounded flex items-center justify-center shrink-0 mt-0.5 cursor-pointer"
+          className="w-[18px] h-[18px] rounded flex items-center justify-center shrink-0 mt-0.5 cursor-pointer md:w-5 md:h-5"
           style={{
             border: `2px solid ${isDone ? "#10b981" : "#444"}`,
             background: isDone ? "#10b981" : "transparent",
@@ -75,7 +74,7 @@ export default function TaskItem({
           {isDone && <CheckIcon />}
         </div>
         <span
-          className="text-xs leading-relaxed flex-1"
+          className="text-xs leading-relaxed flex-1 md:text-sm"
           style={{ opacity: isDone ? 0.4 : 1, textDecoration: isDone ? "line-through" : "none" }}
         >
           {task.type === "reflect" ? "💭 " : ""}{task.text}
@@ -85,12 +84,12 @@ export default function TaskItem({
 
       {/* Explainer panel */}
       {isExpanded && (
-        <div className="px-3 pb-3 border-t border-vc-border-inner">
+        <div className="px-3 pb-3 border-t border-vc-border-inner md:px-4 md:pb-4">
           <div className="mt-2.5 mb-2.5">
-            <div className="text-[10px] font-bold uppercase tracking-widest mb-1.5" style={{ color: weekColor }}>
+            <div className="text-[10px] font-bold uppercase tracking-widest mb-1.5 md:text-[11px]" style={{ color: weekColor }}>
               📖 How To Do This
             </div>
-            <div className="text-xs leading-[1.7] text-[#bbb] whitespace-pre-line">{task.how}</div>
+            <div className="text-xs leading-[1.7] text-[#bbb] whitespace-pre-line md:text-sm md:leading-[1.8]">{task.how}</div>
           </div>
           <div
             className="rounded-md px-2.5 py-2 mb-3"
@@ -99,7 +98,7 @@ export default function TaskItem({
             <div className="text-[10px] font-bold uppercase tracking-widest text-vc-gold mb-1">
               💡 Why This Matters
             </div>
-            <div className="text-xs leading-relaxed text-vc-text-muted">{task.why}</div>
+            <div className="text-xs leading-relaxed text-vc-text-muted md:text-sm">{task.why}</div>
           </div>
 
           {/* Action buttons */}
@@ -108,22 +107,22 @@ export default function TaskItem({
               <div className="flex items-center gap-2">
                 <button
                   onClick={handleAskClaude}
-                  className="flex-1 py-2 rounded-lg text-xs font-bold font-sans border-none cursor-pointer"
+                  className="flex-1 py-2 rounded-lg text-xs font-bold font-sans border-none cursor-pointer md:py-2.5 md:text-sm"
                   style={{ background: "linear-gradient(135deg, #00f0ff, #a855f7)", color: "#000" }}
                 >
-                  {copied ? "Prompt copied. Paste it into Claude." : "Ask Claude"}
+                  Get help with this task
                 </button>
                 <button
                   onClick={handleCopyPrompt}
-                  className="px-3 py-2 rounded-lg text-[10px] text-vc-text-dim bg-vc-surface-hover border-none cursor-pointer hover:text-vc-text-secondary transition-colors"
+                  className="px-3 py-2 rounded-lg text-[10px] text-vc-text-dim bg-vc-surface-hover border-none cursor-pointer hover:text-vc-text-secondary transition-colors md:text-xs"
                 >
-                  Copy prompt
+                  {copied ? "Copied" : "Copy prompt"}
                 </button>
               </div>
             )}
             <button
               onClick={(e) => { e.stopPropagation(); onToggleComplete(); }}
-              className="w-full py-2.5 rounded-[7px] border-none text-[13px] font-bold cursor-pointer font-sans"
+              className="w-full py-2.5 rounded-[7px] border-none text-[13px] font-bold cursor-pointer font-sans md:text-sm md:py-3"
               style={{
                 background: isDone ? "#1a1a2a" : weekColor,
                 color: isDone ? "#888" : "#000",
@@ -137,7 +136,7 @@ export default function TaskItem({
           <div className="text-center">
             <button
               onClick={onStuck}
-              className="text-[11px] text-vc-text-ghost hover:text-vc-cyan transition-colors bg-transparent border-none cursor-pointer font-mono"
+              className="text-[11px] text-vc-text-ghost hover:text-vc-cyan transition-colors bg-transparent border-none cursor-pointer font-mono md:text-xs"
             >
               I&apos;m stuck
             </button>

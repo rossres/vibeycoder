@@ -11,7 +11,7 @@ interface WeekTabsProps {
 
 export default function WeekTabs({ weeks, activeWeek, weekProgress, onSelectWeek }: WeekTabsProps) {
   return (
-    <div className="flex gap-1.5 px-5 py-3 overflow-x-auto">
+    <div className="flex gap-1.5 px-5 py-3 overflow-x-auto md:px-8 md:gap-2 md:justify-center md:overflow-x-visible">
       {weeks.map((w, i) => {
         const p = weekProgress(i);
         const isActive = activeWeek === i;
@@ -19,7 +19,7 @@ export default function WeekTabs({ weeks, activeWeek, weekProgress, onSelectWeek
           <button
             key={i}
             onClick={() => onSelectWeek(i)}
-            className="flex flex-col items-center gap-0.5 px-3.5 py-2 rounded-[10px] cursor-pointer min-w-[64px] font-mono bg-transparent transition-colors"
+            className="flex flex-col items-center gap-0.5 px-3.5 py-2 rounded-[10px] cursor-pointer min-w-[64px] font-mono bg-transparent transition-all duration-200 hover:bg-vc-surface/50 md:min-w-[80px] md:px-5 md:py-2.5"
             style={{
               border: `2px solid ${isActive ? w.color : "transparent"}`,
               background: isActive ? `${w.color}12` : "transparent",
@@ -27,7 +27,7 @@ export default function WeekTabs({ weeks, activeWeek, weekProgress, onSelectWeek
             }}
           >
             <span className="text-lg">{w.icon}</span>
-            <span className="text-[10px] font-semibold tracking-wide">WK {i + 1}</span>
+            <span className="text-[10px] font-semibold tracking-wide md:text-xs">WK {i + 1}</span>
             <span className="text-xs font-bold" style={{ color: w.color }}>{p.pct}%</span>
           </button>
         );

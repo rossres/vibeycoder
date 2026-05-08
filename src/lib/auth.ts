@@ -1,6 +1,7 @@
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendEmailVerification,
   signOut as firebaseSignOut,
   onAuthStateChanged,
   type User,
@@ -19,12 +20,29 @@ export async function signUp(
   const credential = await createUserWithEmailAndPassword(auth, email, password);
   const user = credential.user;
 
-  await createUserProfile(user.uid, name, email);
+  // Send verification email — required before chat/notify endpoints when
+  // REQUIRE_EMAIL_VERIFIED is enabled server-side. Fire-and-forget.
+  sendEmailVerification(user).catch((e) =>
+    console.error("sendEmailVerification failed:", e)
+  );
+
+  // Firestore writes are fire-and-forget — never block signup
+  createUserProfile(user.uid, name, email).catch((e) =>
+    console.error("Firestore profile write failed:", e)
+  );
   if (Object.keys(existingProgress).length > 0) {
-    await saveUserProgress(user.uid, existingProgress);
+    saveUserProgress(user.uid, existingProgress).catch((e) =>
+      console.error("Firestore progress write failed:", e)
+    );
   }
 
   return user;
+}
+
+export async function resendVerificationEmail(): Promise<void> {
+  const auth = getFirebaseAuth();
+  if (!auth?.currentUser) throw new Error("Not signed in");
+  await sendEmailVerification(auth.currentUser);
 }
 
 export async function signIn(email: string, password: string): Promise<User> {

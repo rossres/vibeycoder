@@ -51,7 +51,7 @@ export default function AuthModal({ mode: initialMode, name, existingProgress, o
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-5">
-      <div className="bg-vc-card border border-vc-border rounded-xl max-w-[400px] w-full p-6 relative">
+      <div className="bg-vc-card border border-vc-border rounded-xl max-w-[400px] w-full p-6 relative md:max-w-md md:p-8">
         <button
           onClick={onClose}
           className="absolute top-3 right-3 text-vc-text-ghost hover:text-vc-text text-lg bg-transparent border-none cursor-pointer"
@@ -59,7 +59,7 @@ export default function AuthModal({ mode: initialMode, name, existingProgress, o
           ✕
         </button>
 
-        <h2 className="text-xl font-bold text-vc-text font-sans mb-1">
+        <h2 className="text-xl font-bold text-vc-text font-sans mb-1 md:text-2xl">
           {mode === "signup" ? "Save Your Progress" : "Welcome Back"}
         </h2>
         <p className="text-xs text-vc-text-dim mb-5">

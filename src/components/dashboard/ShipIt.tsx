@@ -12,14 +12,26 @@ interface ShipItProps {
   onContinue: () => void;
 }
 
+/** Only allow http/https URLs to prevent javascript: XSS */
+function isSafeUrl(url: string): boolean {
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === "http:" || parsed.protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
 export default function ShipIt({ weekIndex, weekTitle, existingShip, onShip, onContinue }: ShipItProps) {
   const [link, setLink] = useState(existingShip?.link || "");
   const [shipped, setShipped] = useState(!!existingShip);
   const [linkCopied, setLinkCopied] = useState(false);
 
   const handleShip = () => {
-    if (!link.trim()) return;
-    onShip(weekIndex, link.trim());
+    const trimmed = link.trim();
+    if (!trimmed) return;
+    if (!isSafeUrl(trimmed)) return;
+    onShip(weekIndex, trimmed);
     setShipped(true);
     track("ship_link_submitted", { week: weekIndex + 1 });
   };
@@ -32,12 +44,12 @@ export default function ShipIt({ weekIndex, weekTitle, existingShip, onShip, onC
 
   if (shipped) {
     return (
-      <div className="bg-vc-card rounded-xl p-5 text-center" style={{ borderLeft: "3px solid #10b981" }}>
+      <div className="bg-vc-card rounded-xl p-5 text-center md:p-8" style={{ borderLeft: "3px solid #10b981" }}>
         <div className="text-4xl mb-3">🚀</div>
         <div className="text-lg font-bold text-vc-text font-sans mb-1">Shipped.</div>
-        <div className="text-2xl font-extrabold text-vc-text font-sans mb-4">Yo, I built this.</div>
+        <div className="text-2xl font-extrabold text-vc-text font-sans mb-4 md:text-3xl">Yo, I built this.</div>
         <div className="flex justify-center gap-2 mb-4">
-          {link && (
+          {link && isSafeUrl(link) && (
             <>
               <a
                 href={link}
@@ -66,8 +78,9 @@ export default function ShipIt({ weekIndex, weekTitle, existingShip, onShip, onC
           </button>
         )}
         {weekIndex === 3 && (
-          <div className="text-sm text-vc-green font-bold font-sans mt-2">
-            🎓 You graduated. Legend.
+          <div className="mt-4 text-center">
+            <div className="text-sm font-bold text-vc-text font-sans mb-1">You built 4 real apps in 28 days.</div>
+            <div className="text-xs text-vc-text-dim">Most people never ship one.</div>
           </div>
         )}
       </div>
@@ -75,7 +88,7 @@ export default function ShipIt({ weekIndex, weekTitle, existingShip, onShip, onC
   }
 
   return (
-    <div className="bg-vc-card rounded-xl p-5" style={{ borderLeft: "3px solid #f97316" }}>
+    <div className="bg-vc-card rounded-xl p-5 md:p-8" style={{ borderLeft: "3px solid #f97316" }}>
       <div className="text-2xl mb-2">🚀</div>
       <h3 className="text-base font-bold text-vc-text font-sans mb-1">Ship It</h3>
       <p className="text-xs text-vc-text-dim mb-4">
@@ -85,7 +98,7 @@ export default function ShipIt({ weekIndex, weekTitle, existingShip, onShip, onC
         value={link}
         onChange={(e) => setLink(e.target.value)}
         placeholder="Paste your link here..."
-        className="w-full bg-vc-surface-alt border border-vc-input-border rounded-lg px-3 py-2.5 text-xs text-vc-text font-mono outline-none mb-3 placeholder:text-vc-text-ghost focus:border-vc-cyan/50 transition-colors"
+        className="w-full bg-vc-surface-alt border border-vc-input-border rounded-lg px-3 py-2.5 text-xs text-vc-text font-mono outline-none mb-3 placeholder:text-vc-text-ghost focus:border-vc-cyan/50 transition-colors md:text-sm md:py-3"
       />
       <button
         onClick={handleShip}

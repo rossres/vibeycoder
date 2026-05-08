@@ -2,21 +2,21 @@ import Footer from "@/components/layout/Footer";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | VibeyCoder",
+  title: "Terms of Service",
 };
 
 export default function TermsPage() {
   return (
     <div className="min-h-screen bg-vc-bg text-vc-text-secondary font-mono flex flex-col">
-      <div className="flex-1 max-w-2xl mx-auto px-6 py-12">
-        <h1 className="text-2xl font-bold text-vc-text font-sans mb-6">Terms of Service</h1>
+      <div className="flex-1 max-w-2xl mx-auto px-6 py-12 md:px-8 md:py-16 lg:max-w-3xl">
+        <h1 className="text-2xl font-bold text-vc-text font-sans mb-6 md:text-3xl">Terms of Service</h1>
         <p className="text-xs text-vc-text-ghost mb-8">Last updated: February 27, 2026</p>
 
         <div className="space-y-6 text-sm text-vc-text-muted leading-relaxed">
           <section>
             <h2 className="text-base font-bold text-vc-text font-sans mb-2">1. Acceptance of Terms</h2>
             <p>
-              By accessing and using VibeyCoder (&quot;vibeycoder.ai&quot;), you accept and agree to be bound by
+              By accessing and using VibeyCoder (&quot;vibeycoder.ai&quot;), operated by NavamaCo LLC, you accept and agree to be bound by
               these Terms of Service. If you are under 18, a parent or legal guardian must agree to
               these terms on your behalf.
             </p>
@@ -25,9 +25,8 @@ export default function TermsPage() {
           <section>
             <h2 className="text-base font-bold text-vc-text font-sans mb-2">2. Description of Service</h2>
             <p>
-              VibeyCoder provides a free, self-paced AI coding bootcamp curriculum designed for teens
-              and beginners. The service includes structured lessons, task tracking, and progress
-              persistence.
+              VibeyCoder provides a free, self-paced AI coding curriculum designed for beginners.
+              The service includes structured lessons, task tracking, and progress persistence.
             </p>
           </section>
 
@@ -55,7 +54,7 @@ export default function TermsPage() {
             <h2 className="text-base font-bold text-vc-text font-sans mb-2">5. Intellectual Property</h2>
             <p>
               All content, curriculum materials, and code provided through VibeyCoder are the
-              property of VibeyCoder and are protected by copyright. You may use the curriculum
+              property of NavamaCo LLC and are protected by copyright. You may use the curriculum
               for personal learning purposes but may not redistribute, resell, or republish the
               content without permission.
             </p>
@@ -82,7 +81,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-base font-bold text-vc-text font-sans mb-2">8. Limitation of Liability</h2>
             <p>
-              VibeyCoder shall not be liable for any indirect, incidental, special, consequential,
+              NavamaCo LLC (doing business as VibeyCoder) shall not be liable for any indirect, incidental, special, consequential,
               or punitive damages resulting from your use of or inability to use the service.
             </p>
           </section>
@@ -109,7 +108,7 @@ export default function TermsPage() {
             <h2 className="text-base font-bold text-vc-text font-sans mb-2">11. Contact</h2>
             <p>
               For questions about these terms, contact us at{" "}
-              <span className="text-vc-cyan">hello@vibeycoder.ai</span>.
+              <span className="text-vc-cyan">privacy@navamaco.com</span>.
             </p>
           </section>
         </div>

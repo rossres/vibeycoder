@@ -9,7 +9,7 @@ interface SignUpPromptProps {
 export default function SignUpPrompt({ name, onSignUp, onDismiss }: SignUpPromptProps) {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-40 animate-slide-up">
-      <div className="mx-4 mb-4 bg-vc-card border border-vc-border rounded-xl p-4 shadow-2xl max-w-lg sm:mx-auto">
+      <div className="mx-4 mb-4 bg-vc-card border border-vc-border rounded-xl p-4 shadow-2xl max-w-lg sm:mx-auto md:max-w-xl md:p-5">
         <div className="flex items-start gap-3">
           <span className="text-2xl">🎉</span>
           <div className="flex-1">

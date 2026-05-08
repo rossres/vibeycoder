@@ -19,6 +19,7 @@ interface DayAccordionProps {
   expandedTask: number | null;
   onToggleTask: (taskIdx: number) => void;
   onStuck: (taskIdx: number) => void;
+  onAskClaude: (taskIdx: number) => void;
 }
 
 export default function DayAccordion({
@@ -35,18 +36,19 @@ export default function DayAccordion({
   expandedTask,
   onToggleTask,
   onStuck,
+  onAskClaude,
 }: DayAccordionProps) {
   const isDone = dayProgress.pct === 100;
 
   return (
     <div
-      className="bg-vc-card rounded-[10px] overflow-hidden"
+      className="bg-vc-card rounded-[10px] overflow-hidden transition-all duration-200 hover:bg-vc-card/80"
       style={{ borderLeft: `3px solid ${isDone ? "#10b981" : weekColor}` }}
     >
       {/* Day header */}
       <button
         onClick={onToggleExpand}
-        className="w-full flex justify-between items-center px-3.5 py-3 bg-transparent border-none cursor-pointer text-vc-text-secondary font-mono"
+        className="w-full flex justify-between items-center px-3.5 py-3 bg-transparent border-none cursor-pointer text-vc-text-secondary font-mono md:px-4 md:py-3.5"
       >
         <div className="flex items-center gap-2.5">
           <div
@@ -59,8 +61,8 @@ export default function DayAccordion({
             {isDone ? <CheckIcon /> : `D${day.day}`}
           </div>
           <div className="text-left">
-            <div className="text-[13px] font-bold text-vc-text">{day.title}</div>
-            <div className="text-[10px] text-vc-text-faint mt-px">
+            <div className="text-[13px] font-bold text-vc-text md:text-sm">{day.title}</div>
+            <div className="text-[10px] text-vc-text-faint mt-px md:text-[11px]">
               {day.time} · {dayProgress.dn}/{dayProgress.tot}
             </div>
           </div>
@@ -78,11 +80,11 @@ export default function DayAccordion({
 
       {/* Day content */}
       {isExpanded && (
-        <div className="px-3.5 pb-3.5">
+        <div className="px-3.5 pb-3.5 md:px-4 md:pb-4">
           {/* Objective */}
           <div className="bg-vc-card-inner rounded-lg px-3 py-2.5 mb-3 flex gap-2">
             <span className="text-[13px]">🎯</span>
-            <span className="text-xs text-vc-text-muted leading-relaxed">{day.objective}</span>
+            <span className="text-xs text-vc-text-muted leading-relaxed md:text-sm">{day.objective}</span>
           </div>
 
           {/* Tasks */}
@@ -104,20 +106,21 @@ export default function DayAccordion({
                   onToggleExpand={() => onToggleTask(ti)}
                   onToggleComplete={() => toggle(weekIndex, dayIndex, ti)}
                   onStuck={() => onStuck(ti)}
+                  onAskClaude={() => onAskClaude(ti)}
                 />
               );
             })}
           </div>
 
           {/* Takeaway + Pro Tip */}
-          <div className="flex flex-col gap-1.5">
-            <div className="rounded-[7px] px-3 py-2.5" style={{ background: "#00f0ff08", border: "1px solid #00f0ff18" }}>
-              <div className="text-[10px] font-bold tracking-wide text-vc-cyan mb-0.5">💡 KEY TAKEAWAY</div>
-              <div className="text-xs leading-relaxed text-[#aaa]">{day.keyTakeaway}</div>
+          <div className="flex flex-col gap-1.5 md:flex-row md:gap-3">
+            <div className="rounded-[7px] px-3 py-2.5 md:flex-1" style={{ background: "#00f0ff08", border: "1px solid #00f0ff18" }}>
+              <div className="text-[10px] font-bold tracking-wide text-vc-cyan mb-0.5 md:text-[11px]">💡 KEY TAKEAWAY</div>
+              <div className="text-xs leading-relaxed text-[#aaa] md:text-sm">{day.keyTakeaway}</div>
             </div>
-            <div className="rounded-[7px] px-3 py-2.5" style={{ background: "#f9731608", border: "1px solid #f9731618" }}>
-              <div className="text-[10px] font-bold tracking-wide text-vc-orange mb-0.5">⭐ PRO TIP</div>
-              <div className="text-xs leading-relaxed text-[#aaa]">{day.proTip}</div>
+            <div className="rounded-[7px] px-3 py-2.5 md:flex-1" style={{ background: "#f9731608", border: "1px solid #f9731618" }}>
+              <div className="text-[10px] font-bold tracking-wide text-vc-orange mb-0.5 md:text-[11px]">⭐ PRO TIP</div>
+              <div className="text-xs leading-relaxed text-[#aaa] md:text-sm">{day.proTip}</div>
             </div>
           </div>
         </div>

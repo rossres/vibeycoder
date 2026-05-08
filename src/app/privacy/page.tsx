@@ -2,21 +2,21 @@ import Footer from "@/components/layout/Footer";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | VibeyCoder",
+  title: "Privacy Policy",
 };
 
 export default function PrivacyPage() {
   return (
     <div className="min-h-screen bg-vc-bg text-vc-text-secondary font-mono flex flex-col">
-      <div className="flex-1 max-w-2xl mx-auto px-6 py-12">
-        <h1 className="text-2xl font-bold text-vc-text font-sans mb-6">Privacy Policy</h1>
+      <div className="flex-1 max-w-2xl mx-auto px-6 py-12 md:px-8 md:py-16 lg:max-w-3xl">
+        <h1 className="text-2xl font-bold text-vc-text font-sans mb-6 md:text-3xl">Privacy Policy</h1>
         <p className="text-xs text-vc-text-ghost mb-8">Last updated: February 27, 2026</p>
 
         <div className="space-y-6 text-sm text-vc-text-muted leading-relaxed">
           <section>
             <h2 className="text-base font-bold text-vc-text font-sans mb-2">Overview</h2>
             <p>
-              VibeyCoder (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) operates vibeycoder.ai. This page informs you of our
+              NavamaCo LLC (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;), doing business as VibeyCoder, operates vibeycoder.ai. This page informs you of our
               policies regarding the collection, use, and disclosure of personal data when you use
               our service.
             </p>
@@ -53,10 +53,10 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-base font-bold text-vc-text font-sans mb-2">Users Under 18</h2>
             <p>
-              VibeyCoder is designed for teens learning to code. If you are under 13 years old, please
-              have a parent or guardian create an account on your behalf. We comply with applicable
-              children&apos;s privacy regulations including COPPA. Parents or guardians may contact us at
-              any time to review, delete, or stop the collection of their child&apos;s information.
+              If you are under 13 years old, a parent or guardian must create an account on your behalf.
+              We comply with applicable children&apos;s privacy regulations including COPPA. Parents or
+              guardians may contact us at any time to review, delete, or stop the collection of their
+              child&apos;s information.
             </p>
           </section>
 
@@ -80,7 +80,7 @@ export default function PrivacyPage() {
             <h2 className="text-base font-bold text-vc-text font-sans mb-2">Contact</h2>
             <p>
               For questions about this privacy policy or to request data deletion, please contact us
-              at <span className="text-vc-cyan">privacy@vibeycoder.ai</span>.
+              at <span className="text-vc-cyan">privacy@navamaco.com</span>.
             </p>
           </section>
         </div>

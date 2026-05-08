@@ -3,15 +3,18 @@
 type AnalyticsEvent =
   | "landing_start_clicked"
   | "name_set"
-  | "intro_open_claude_clicked"
-  | "intro_completed"
   | "lab_entered"
   | "week_started"
   | "day_opened"
   | "task_done_toggled"
   | "ask_claude_clicked"
   | "stuck_opened"
-  | "ship_link_submitted";
+  | "ship_link_submitted"
+  | "chat_opened"
+  | "chat_message_sent"
+  | "chat_closed"
+  | "intro_open_claude_clicked"
+  | "intro_completed";
 
 interface EventData {
   week?: number;
