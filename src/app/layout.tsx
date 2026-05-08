@@ -69,6 +69,11 @@ export default function RootLayout({
             gtag('config', 'G-E08YTBEPF2');
           `}
         </Script>
+        <script
+          src="https://www.jetti.co/snippet.js"
+          data-jetti-session="snp_mCWFcOc9V-sJoPlP"
+          data-jetti-api="https://www.jetti.co"
+        />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <AuthProvider>
